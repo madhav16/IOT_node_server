@@ -21,6 +21,16 @@ export async function getByName(req,res){
     res.status(409).json(error.message);
    }
 }
+export async function deleteSub(req,res) {
+    const id = req.query.id;
+    console.log(id);
+    try {
+        const response = await user1.deleteOne({_id:id});
+        res.status(200).json({message:'user deleted'});
+    } catch (error) {
+        res.status(409).json(error.message);
+    }
+}
 
 export async function loginUser(req, res) {
     const { username,password } = req.body;
