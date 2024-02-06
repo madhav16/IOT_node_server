@@ -11,6 +11,7 @@ const teacherSchema = mongoose.Schema({
 
 })
 
+
 export const user = mongoose.model('login', userSchema);
 
 export const user1 = mongoose.model('teacher',teacherSchema);
