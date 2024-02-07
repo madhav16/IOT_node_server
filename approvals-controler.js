@@ -18,11 +18,11 @@ export async function getAllApprovals(req, res) {
 
 
 export async function handleApprovalsOperation(req, res) {
-    const { title, description, people, status } = req.body;
+    const { subject, description, people, priority } = req.body;
 
     try {
         // Create a new entry with provided data
-        const newApprovalsData = new ApprovalsModel({ title, description, people, status });
+        const newApprovalsData = new ApprovalsModel({ subject, description, people, priority }); // Set status to 'pending' by default
         await newApprovalsData.save();
 
         // Send a success response
