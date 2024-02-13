@@ -5,10 +5,11 @@ const approvalsSchema = mongoose.Schema({
     description: String,
     people: [{ 
         id: mongoose.Schema.Types.ObjectId,
-        order_sequence: Number  // Including order_sequence in the people array
+        order_sequence: Number,
+        people_status: { type: String, enum: ['Pending', 'Accepted', 'Rejected', 'Cancelled'], default: 'Pending' } // Added people_status field
     }],
-    status: { type: String, enum: ['Pending', 'Accepted', 'Rejected', 'Cancelled'], default: 'Pending' }, // Corrected spelling and capitalization, added default value
-    priority: { type: String, enum: ['Low', 'Medium', 'High'] } // Corrected capitalization of enum values
+    status: { type: String, enum: ['Pending', 'Accepted', 'Rejected', 'Cancelled'], default: 'Pending' },
+    priority: { type: String, enum: ['Low', 'Medium', 'High'] }
 });
 
 export const ApprovalsModel = mongoose.model('Approvals', approvalsSchema);

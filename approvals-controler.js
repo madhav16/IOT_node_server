@@ -33,3 +33,27 @@ export async function handleApprovalsOperation(req, res) {
         res.status(500).json({ message: "Internal Server Error" });
     }
 }
+
+export async function getByApprovalsId(req, res) {
+    try {
+      const id = req.query.id; // Retrieve ID from URL params
+      console.log(req.query.id);
+      // Validate ID format (optional)
+      
+  
+      // Find the approval with the specified ID
+      const approval = await ApprovalsModel.findById(id);
+  
+      if (!approval) {
+        return res.status(404).json({ message: "Approval not found" });
+      }
+  
+      // Send a success response with the retrieved data
+      res.status(200).json(approval);
+    } catch (error) {
+      // Handle errors
+      console.error(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+ 

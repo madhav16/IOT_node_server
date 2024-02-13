@@ -1,6 +1,6 @@
 import express from "express";
 import {addTeacher, loginUser, getByName, deleteSub,get, getById, updateById, getByPage} from "./user-controler.js";
-import { getAllApprovals, handleApprovalsOperation } from "./approvals-controler.js";
+import { getAllApprovals, getByApprovalsId, handleApprovalsOperation } from "./approvals-controler.js";
 import { createUser, getAllUsers } from "./UserControler.js";
 
 const router = express.Router();
@@ -15,7 +15,7 @@ router.get('/',get);
 router.get('/getByPage',getByPage)
 router.get('/approvals', getAllApprovals);
 router.post('/approvals/add', handleApprovalsOperation);
-
+router.get('/approvals/getbyid', getByApprovalsId);
 
 router.post('/users/add', createUser);
 
