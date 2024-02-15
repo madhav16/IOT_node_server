@@ -54,7 +54,7 @@ export async function getByPage(req, res) {
 
         const response = await user1.find().skip((pageNO - 1) * limit).limit(limit);
 
-        res.status(200).json({ data: response, hasMore });
+        res.status(200).json({ data: response, hasMore,totalPages });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
