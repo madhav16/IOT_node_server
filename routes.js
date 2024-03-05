@@ -1,6 +1,6 @@
 import express from "express";
 import {addTeacher, loginUser, getByName, deleteSub,get, getById, updateById, getByPage} from "./user-controler.js";
-import { getAllApprovals, getByApprovalsId, handleApprovalsOperation } from "./approvals-controler.js";
+import { getAllApprovals, getByApprovalsId, handleApprovalsOperation,createEvent,getAllEvents } from "./approvals-controler.js";
 import { createUser, getAllUsers } from "./UserControler.js";
 
 const router = express.Router();
@@ -21,5 +21,9 @@ router.post('/users/add', createUser);
 
 // Route to retrieve all users
 router.get('/users', getAllUsers);
+
+//Route for all event
+router.post('/events/add', createEvent); // Route for creating an event
+router.get('/events', getAllEvents);
 
 export default router;
