@@ -1,6 +1,6 @@
 import express from "express";
 import {addTeacher, loginUser, getByName, deleteSub,get, getById, updateById, getByPage} from "./user-controler.js";
-import { getAllApprovals, getByApprovalsId, handleApprovalsOperation,createEvent,getAllEvents } from "./approvals-controler.js";
+import { getAllApprovals, getByApprovalsId, handleApprovalsOperation,createEvent,getAllEvents, updateEventById, getEventById } from "./approvals-controler.js";
 import { createUser, getAllUsers } from "./UserControler.js";
 
 const router = express.Router();
@@ -25,5 +25,7 @@ router.get('/users', getAllUsers);
 //Route for all event
 router.post('/events/add', createEvent); // Route for creating an event
 router.get('/events', getAllEvents);
+router.put('/events', updateEventById);
+router.get('/events/getById', getEventById);
 
 export default router;

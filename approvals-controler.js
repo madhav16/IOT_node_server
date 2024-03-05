@@ -113,4 +113,59 @@ export const getAllEvents = async (req, res) => {
     }
 };
 
+export const updateEventById = async (req, res) => {
+  const eventId = req.query.id; // Assuming you pass the event ID in the query parameter
+  const updatedData = req.body;
+  const coverImages = [
+    "https://images.unsplash.com/photo-1707173513949-da36b73461ad?q=80&w=2068&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1707152567175-f840e5b4232c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1701369518365-5c61925a3f7c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1705931607938-fa3b30611e15?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTh8fHxlbnwwfHx8fHw%3D",
+    "https://images.unsplash.com/photo-1707197066378-36583db5e892?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1707139057009-dd16280fa07f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MzR8fHxlbnwwfHx8fHw%3D",
+    "https://images.unsplash.com/photo-1707145301260-8d5c3dc9f015?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+];
+
+const randomIndex = Math.floor(Math.random() * coverImages.length);
+const coverImage = coverImages[randomIndex];
+updatedData.cover_image=coverImage;
+  try {
+      const updatedEvent = await Event.findByIdAndUpdate(
+          eventId,
+          updatedData,
+          { new: true } // Return the modified document rather than the original
+      );
+
+      if (!updatedEvent) {
+          return res.status(404).json({ message: "Event not found" });
+      }
+
+      // Send a success response with the updated event data
+      res.status(200).json(updatedEvent);
+  } catch (error) {
+      // Handle any errors
+      console.error('Error updating event:', error);
+      res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export const getEventById = async (req, res) => {
+  const eventId = req.query.id; // Assuming you pass the event ID in the URL parameter
+
+  try {
+      const event = await Event.findById(eventId);
+
+      if (!event) {
+          return res.status(404).json({ message: "Event not found" });
+      }
+
+      // Send a success response with the event data
+      res.status(200).json(event);
+  } catch (error) {
+      // Handle any errors
+      console.error('Error fetching event:', error);
+      res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
  
